@@ -1,0 +1,50 @@
+#!/bin/bash
+num_epochs=325
+
+batch_size=32
+num_workers=8
+
+lr=1e-4
+weight_decay=0.996
+adam_epsilon=1e-8
+max_grad_norm=1.0
+schedule_factor=9e-1
+schedule_patience=10
+warmup_steps=100
+
+dropout_rate=1e-1
+norm_epsilon=1e-8
+
+num_layers=4
+num_heads=10
+num_features=20
+dim_embd=256
+dim_qkv=640     # = 64 * $num_heads
+dim_hidden=1792 # = 256*7
+
+output_dir="./checkpoint"
+
+seed=42
+
+mkdir -p $output_dir
+
+python main.py \
+--num_epochs $num_epochs \
+--batch_size $batch_size \
+--num_workers $num_workers \
+--learning_rate $lr \
+--weight_decay $weight_decay \
+--adam_epsilon $adam_epsilon \
+--max_grad_norm $max_grad_norm \
+--schedule_factor $schedule_factor \
+--schedule_patience $schedule_patience \
+--warmup_steps $warmup_steps \
+--num_layers $num_layers \
+--num_heads $num_heads \
+--num_features $num_features \
+--dim_qkv $dim_qkv \
+--dim_embed $dim_embd \
+--dim_hidden $dim_hidden \
+--dropout_rate $dropout_rate \
+--norm_epsilon $norm_epsilon \
+--seed $seed
